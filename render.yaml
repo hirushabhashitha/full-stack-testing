@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: full-stack-frontend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://full-stack-testing-bm2o.onrender.com
