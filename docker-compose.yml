@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: portal_backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env   # 👈 මෙයින් backend/.env එකේ ඇති සියලුම variables කන්ටේනරයට එකතු වේ
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: portal_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: always
