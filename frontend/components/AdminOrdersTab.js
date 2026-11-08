@@ -82,7 +82,7 @@ export default function AdminOrdersTab() {
     }
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="p-2 sm:p-6 space-y-4 sm:space-y-6">
             {/* Header */}
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                 <h1 className="text-2xl font-bold text-gray-800">Admin Order Management</h1>

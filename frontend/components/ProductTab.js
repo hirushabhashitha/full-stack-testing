@@ -96,7 +96,7 @@ export default function ProductTab({ products, setProducts }) {
   return (
     <div className="space-y-6">
       {/* Header with Professional Right-Aligned Add Product Button */}
-      <div className="flex justify-between items-center bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-sm">
         <div>
           <h2 className="text-xl font-bold text-gray-800">Product Management (Admin)</h2>
           <p className="text-xs text-gray-400 mt-0.5">Manage store inventory, prices, and product details</p>
@@ -107,7 +107,7 @@ export default function ProductTab({ products, setProducts }) {
             setFormData({ name: '', price: '', category: '', stock: '', description: '', image: '' });
             setIsFormModalOpen(true);
           }}
-          className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition shadow-sm inline-flex items-center gap-2 cursor-pointer"
+          className="justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition shadow-sm inline-flex items-center gap-2 cursor-pointer"
         >
           <span>+</span> Add Product
         </button>
@@ -116,8 +116,8 @@ export default function ProductTab({ products, setProducts }) {
       {error && <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs">{error}</div>}
 
       {/* Products List Table */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-        <table className="w-full text-left border-collapse text-xs">
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-x-auto shadow-sm">
+        <table className="w-full min-w-[640px] text-left border-collapse text-xs">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200 text-gray-600">
               <th className="p-3.5">Image</th>

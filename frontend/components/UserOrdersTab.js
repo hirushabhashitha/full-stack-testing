@@ -53,7 +53,7 @@ export default function UserOrdersTab() {
     if (error) return <div className="p-8 text-center text-red-500 font-medium">{error}</div>;
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="p-2 sm:p-6 space-y-4 sm:space-y-6">
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                 <h1 className="text-2xl font-bold text-gray-800">My Order History</h1>
                 <p className="text-xs text-gray-400 mt-0.5">Track the status of your recent orders here</p>

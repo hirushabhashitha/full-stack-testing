@@ -81,12 +81,12 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* TOP HEADER */}
-      <header className="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center shadow-sm">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-8 py-3 sm:py-4 flex flex-wrap gap-3 justify-between items-center shadow-sm">
         <div className="flex items-center gap-3">
           <div className="bg-blue-600 text-white font-bold p-2.5 rounded-xl text-xl">SP</div>
-          <span className="text-xl font-bold text-gray-800">Seller Portal</span>
+          <span className="text-lg sm:text-xl font-bold text-gray-800">Seller Portal</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
               {user.username ? user.username.charAt(0).toUpperCase() : 'U'}
@@ -98,7 +98,7 @@ export default function Dashboard() {
           </div>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition border border-red-200"
+            className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition border border-red-200"
           >
             Logout
           </button>
@@ -106,13 +106,13 @@ export default function Dashboard() {
       </header>
 
       {/* MAIN LAYOUT */}
-      <div className="flex flex-1 w-full p-6 gap-6 items-start justify-start">
+      <div className="flex flex-col sm:flex-row flex-1 w-full p-2 sm:p-6 gap-2 sm:gap-6 items-stretch sm:items-start justify-start">
 
         {/* SIDEBAR COMPONENT */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
 
         {/* MAIN CONTENT AREA */}
-        <main className="flex-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-8 min-w-0">
+        <main className="flex-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-8 min-w-0 overflow-hidden">
           {activeTab === 'overview' && (
             <OverviewTab username={user.username} totalProducts={products.length} />
           )}

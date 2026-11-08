@@ -192,10 +192,10 @@ export default function ShopTab({ user }) {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-2 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800">Store / Shop Catalog</h1>
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Store / Shop Catalog</h1>
           <p className="text-xs text-gray-400 mt-0.5">
             {isAdmin ? 'Product Stock & Price Monitoring (Admin Mode)' : 'Browse items and place your orders'}
           </p>
@@ -204,7 +204,7 @@ export default function ShopTab({ user }) {
         {!isAdmin && (
           <button
             onClick={() => setIsCheckoutOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md transition flex items-center gap-2 text-sm"
+            className="w-full sm:w-auto justify-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md transition flex items-center gap-2 text-sm"
           >
             🛒 Cart
             {cart.length > 0 && (
