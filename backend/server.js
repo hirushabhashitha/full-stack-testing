@@ -16,7 +16,13 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://full-stack-frontend-y92c.onrender.com', // ඔබේ Render Frontend URL එක
+    'http://localhost:3000'                        // ලෝකල් ටෙස්ට් කිරීමට
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
