@@ -11,6 +11,7 @@ import ShopTab from '@/components/ShopTab';
 import UserOrdersTab from '@/components/UserOrdersTab';
 import AdminOrdersTab from '@/components/AdminOrdersTab';
 import UserManagementTab from '@/components/UserManagementTab';
+import { API_URL } from '@/lib/api';
 
 
 export default function Dashboard() {
@@ -33,7 +34,7 @@ export default function Dashboard() {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         // 1. Fetch Profile Data
-        const userRes = await axios.get('http://localhost:5000/api/auth/profile', config);
+        const userRes = await axios.get(`${API_URL}/api/auth/profile`, config);
         const userData = userRes.data;
         setUser(userData);
         setProfileData({
@@ -44,7 +45,7 @@ export default function Dashboard() {
 
         // 2. Admin කෙනෙක් නම් පමණක් Products fetch කරගැනීම
         if (userData.role === 'admin') {
-          const productRes = await axios.get('http://localhost:5000/api/products', config);
+          const productRes = await axios.get(`${API_URL}/api/products`, config);
           setProducts(productRes.data);
         }
 

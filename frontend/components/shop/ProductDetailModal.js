@@ -2,6 +2,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '@/lib/api';
 
 export default function ProductDetailModal({ product, isOpen, onClose, onAddToCart, onReviewAdded }) {
     if (!isOpen || !product) return null;
@@ -33,7 +34,7 @@ export default function ProductDetailModal({ product, isOpen, onClose, onAddToCa
         const fetchReviewsAndUser = async () => {
             try {
                 // 1. Fetch ratings/reviews
-                const res = await axios.get(`http://localhost:5000/api/products/${product._id}/ratings`);
+                const res = await axios.get(`${API_URL}/api/products/${product._id}/ratings`);
                 setReviewsList(res.data || []);
 
                 // 2. Read raw local storage values
@@ -105,12 +106,12 @@ export default function ProductDetailModal({ product, isOpen, onClose, onAddToCa
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
             const res = await axios.post(
-                `http://localhost:5000/api/products/${product._id}/ratings`,
+                `${API_URL}/api/products/${product._id}/ratings`,
                 { rating: Number(rating), review: reviewText },
                 config
             );
 
-            const updatedRes = await axios.get(`http://localhost:5000/api/products/${product._id}/ratings`);
+            const updatedRes = await axios.get(`${API_URL}/api/products/${product._id}/ratings`);
             setReviewsList(updatedRes.data || []);
 
             setReviewText('');
@@ -135,7 +136,7 @@ export default function ProductDetailModal({ product, isOpen, onClose, onAddToCa
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
             await axios.put(
-                `http://localhost:5000/api/admin/ratings/${ratingId}/reply`,
+                `${API_URL}/api/admin/ratings/${ratingId}/reply`,
                 { adminReply: replyString },
                 config
             );

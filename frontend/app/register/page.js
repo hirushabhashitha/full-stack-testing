@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import LoadingModal from '@/components/LoadingModal';
 import CustomModal from '@/components/CustomModal';
+import { API_URL } from '@/lib/api';
 
 export default function Register() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -36,7 +37,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await axios.post(`${API_URL}/api/auth/register`, formData);
       setStep(2);
       showModal(res.data.message || 'OTP code sent to your email!', 'success');
     } catch (err) {
@@ -53,7 +54,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-register-otp', {
+      const res = await axios.post(`${API_URL}/api/auth/verify-register-otp`, {
         email: formData.email,
         otp,
       });

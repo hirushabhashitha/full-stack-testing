@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating';
+import { API_URL } from '@/lib/api';
 
 export default function AdminReviewManager({ productId, productName }) {
     const [reviews, setReviews] = useState([]);
@@ -12,7 +13,7 @@ export default function AdminReviewManager({ productId, productName }) {
     const fetchReviews = async () => {
         try {
             setLoading(true);
-            const res = await axios.get(`http://localhost:5000/api/products/${productId}/ratings`);
+            const res = await axios.get(`${API_URL}/api/products/${productId}/ratings`);
             setReviews(res.data);
         } catch (err) {
             console.error('Error fetching reviews for admin:', err);
@@ -34,7 +35,7 @@ export default function AdminReviewManager({ productId, productName }) {
             setSubmittingId(ratingId);
             const token = localStorage.getItem('accessToken');
             await axios.put(
-                `http://localhost:5000/api/admin/ratings/${ratingId}/reply`,
+                `${API_URL}/api/admin/ratings/${ratingId}/reply`,
                 { adminReply: reply },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -55,7 +56,7 @@ export default function AdminReviewManager({ productId, productName }) {
 
         try {
             const token = localStorage.getItem('accessToken');
-            await axios.delete(`http://localhost:5000/api/admin/ratings/${ratingId}`, {
+            await axios.delete(`${API_URL}/api/admin/ratings/${ratingId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchReviews();

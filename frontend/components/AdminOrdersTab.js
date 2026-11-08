@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '@/lib/api';
 
 export default function AdminOrdersTab() {
     const [orders, setOrders] = useState([]);
@@ -23,7 +24,7 @@ export default function AdminOrdersTab() {
     const fetchAllOrders = async () => {
         try {
             const token = localStorage.getItem('accessToken');
-            const res = await axios.get('http://localhost:5000/api/orders/admin/all', {
+            const res = await axios.get(`${API_URL}/api/orders/admin/all`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setOrders(res.data);
@@ -39,7 +40,7 @@ export default function AdminOrdersTab() {
         try {
             const token = localStorage.getItem('accessToken');
             await axios.put(
-                `http://localhost:5000/api/orders/admin/${orderId}/status`,
+                `${API_URL}/api/orders/admin/${orderId}/status`,
                 { status: newStatus, rejectionReason: reason },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

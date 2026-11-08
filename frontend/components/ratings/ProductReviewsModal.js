@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating';
+import { API_URL } from '@/lib/api';
 
 export default function ProductReviewsModal({ productId, productName, user, isOpen, onClose, onReviewSubmitted }) {
     const [reviews, setReviews] = useState([]);
@@ -26,7 +27,7 @@ export default function ProductReviewsModal({ productId, productName, user, isOp
     const fetchReviews = async () => {
         try {
             setFetching(true);
-            const res = await axios.get(`http://localhost:5000/api/products/${productId}/ratings`);
+            const res = await axios.get(`${API_URL}/api/products/${productId}/ratings`);
             setReviews(res.data || []);
         } catch (err) {
             console.error('Error fetching reviews:', err);
@@ -66,7 +67,7 @@ export default function ProductReviewsModal({ productId, productName, user, isOp
         try {
             const token = localStorage.getItem('accessToken');
             await axios.post(
-                `http://localhost:5000/api/products/${productId}/ratings`,
+                `${API_URL}/api/products/${productId}/ratings`,
                 { rating, review: reviewText },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -88,7 +89,7 @@ export default function ProductReviewsModal({ productId, productName, user, isOp
             setSubmittingReplyId(ratingId);
             const token = localStorage.getItem('accessToken');
             await axios.put(
-                `http://localhost:5000/api/admin/ratings/${ratingId}/reply`,
+                `${API_URL}/api/admin/ratings/${ratingId}/reply`,
                 { adminReply: reply },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -114,7 +115,7 @@ export default function ProductReviewsModal({ productId, productName, user, isOp
 
         try {
             const token = localStorage.getItem('accessToken');
-            await axios.delete(`http://localhost:5000/api/admin/ratings/${reviewToDelete}`, {
+            await axios.delete(`${API_URL}/api/admin/ratings/${reviewToDelete}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDeleteModalOpen(false);

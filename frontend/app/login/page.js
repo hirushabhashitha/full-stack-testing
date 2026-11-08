@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import LoadingModal from '@/components/LoadingModal';
 import CustomModal from '@/components/CustomModal';
+import { API_URL } from '@/lib/api';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -58,7 +59,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
       localStorage.setItem('accessToken', res.data.accessToken);
       localStorage.setItem('refreshToken', res.data.refreshToken);
 
@@ -85,7 +86,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/forgot-password', { email: forgotEmail });
+      const res = await axios.post(`${API_URL}/api/auth/forgot-password`, { email: forgotEmail });
       showModal(res.data.message || 'OTP sent successfully!', 'success');
       setStep(3);
       setTimer(60);
@@ -104,7 +105,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:5000/api/auth/forgot-password', { email: forgotEmail });
+      await axios.post(`${API_URL}/api/auth/forgot-password`, { email: forgotEmail });
       showModal('A new OTP code has been sent to your email!', 'success');
       setTimer(60);
       setCanResend(false);
@@ -128,7 +129,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/reset-password', {
+      const res = await axios.post(`${API_URL}/api/auth/reset-password`, {
         email: forgotEmail,
         otp,
         newPassword,

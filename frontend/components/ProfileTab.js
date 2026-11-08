@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import CustomModal from './CustomModal'; // CustomModal එක නිවැරදි Path එකෙන් import කරගන්න
+import { API_URL } from '@/lib/api';
 
 export default function ProfileTab({ user, setUser, profileData, setProfileData }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -31,7 +32,7 @@ export default function ProfileTab({ user, setUser, profileData, setProfileData 
     const token = localStorage.getItem('accessToken'); // ⭐ 'accessToken' ලෙස නිවැරදි කර ඇත
 
     try {
-      const res = await axios.put('http://localhost:5000/api/auth/profile', profileData, {
+      const res = await axios.put(`${API_URL}/api/auth/profile`, profileData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(res.data);

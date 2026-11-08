@@ -2,6 +2,7 @@
 'use client';
 import { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '@/lib/api';
 
 export default function ProductTab({ products, setProducts }) {
   const [formData, setFormData] = useState({
@@ -38,11 +39,11 @@ export default function ProductTab({ products, setProducts }) {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       if (editingId) {
-        const res = await axios.put(`http://localhost:5000/api/products/${editingId}`, formData, config);
+        const res = await axios.put(`${API_URL}/api/products/${editingId}`, formData, config);
         setProducts(products.map((p) => (p._id === editingId ? res.data : p)));
         setEditingId(null);
       } else {
-        const res = await axios.post('http://localhost:5000/api/products', formData, config);
+        const res = await axios.post(`${API_URL}/api/products`, formData, config);
         setProducts([res.data, ...products]);
       }
 
@@ -79,7 +80,7 @@ export default function ProductTab({ products, setProducts }) {
 
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.delete(`http://localhost:5000/api/products/${productToDelete._id}`, {
+      await axios.delete(`${API_URL}/api/products/${productToDelete._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(products.filter((p) => p._id !== productToDelete._id));

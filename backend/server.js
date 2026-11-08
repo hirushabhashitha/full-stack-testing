@@ -18,8 +18,8 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: [
-    'https://full-stack-frontend-y92c.onrender.com', // ඔබේ Render Frontend URL එක
-    'http://localhost:3000'                        // ලෝකල් ටෙස්ට් කිරීමට
+    process.env.FRONTEND_URL || 'https://full-stack-frontend-y92c.onrender.com',
+    'http://localhost:3000'
   ],
   credentials: true
 }));
@@ -42,5 +42,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 

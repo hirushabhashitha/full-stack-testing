@@ -6,6 +6,7 @@ import ProductCard from './shop/ProductCard';
 import ShopFilters from './shop/ShopFilters';
 import CartDrawer from './shop/CartDrawer';
 import ProductDetailModal from './shop/ProductDetailModal';
+import { API_URL } from '@/lib/api';
 import ProductReviewsModal from './ratings/ProductReviewsModal';
 
 export default function ShopTab({ user }) {
@@ -46,7 +47,7 @@ export default function ShopTab({ user }) {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/products/shop');
+      const res = await fetch(`${API_URL}/api/products/shop`);
       if (!res.ok) throw new Error('Failed to fetch products');
       const data = await res.json();
 
@@ -54,7 +55,7 @@ export default function ShopTab({ user }) {
         data.map(async (prod) => {
           try {
             const prodId = prod._id || prod.id;
-            const ratingRes = await axios.get(`http://localhost:5000/api/products/${prodId}/ratings`);
+            const ratingRes = await axios.get(`${API_URL}/api/products/${prodId}/ratings`);
             const ratingsList = ratingRes.data || [];
 
             const count = ratingsList.length;
@@ -158,7 +159,7 @@ export default function ShopTab({ user }) {
         shippingAddress,
       };
 
-      await axios.post('http://localhost:5000/api/orders', orderData, {
+      await axios.post(`${API_URL}/api/orders`, orderData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
